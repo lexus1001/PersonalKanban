@@ -1,5 +1,5 @@
 public class Output {
-    private String task1 = "Wake up";
+    public String task1 = "Wake up";
     private String task2 = "Gimnastic";
     private String task3 = "Daily meeting";
     private String task4 = "Eat";
@@ -15,10 +15,12 @@ public void fullOutput()
     }
     public void urgentOutput()
     {
+
         System.out.println("Task number 1: " + task1);
     }
     public void highOutput()
     {
+
         System.out.println("Task number 2: " + task2);
     }
     public void mediumOutput()
@@ -28,6 +30,7 @@ public void fullOutput()
     }
     public void lowOutput()
     {
+
         System.out.println("Task number 4: " + task4);
     }
 }
