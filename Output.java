@@ -5,32 +5,45 @@ public class Output {
     private String task4 = "Eat";
     String task5;
 
+    void printTitle(){
+
+        System.out.println("Your Kanban board now is:");
+    }
+
 public void fullOutput()
     {
-        System.out.println("Your Kanban board now:");
         urgentOutput();
         highOutput();
         mediumOutput();
         lowOutput();
     }
+
+    public void setTask5(String task5) {
+        this.task5 = task5;
+    }
+
+    public String getTask5() {
+        return task5;
+    }
+
     public void urgentOutput()
     {
-
-        System.out.println("Task number 1: " + task1);
+        printTitle();
+        System.out.println(task1);
     }
     public void highOutput()
     {
-
-        System.out.println("Task number 2: " + task2);
+        printTitle();
+        System.out.println(task2);
     }
     public void mediumOutput()
     {
-        System.out.println("Task number 3: " + task3);
-
+        System.out.println(task3);
     }
     public void lowOutput()
     {
-
-        System.out.println("Task number 4: " + task4);
+        printTitle();
+        System.out.println(task4);
     }
+
 }
