@@ -3,11 +3,10 @@ public class Output {
     private String task2 = "Gimnastic";
     private String task3 = "Daily meeting";
     private String task4 = "Eat";
-    String task5;
 
     void printTitle(){
 
-        System.out.println("Your Kanban board now is:");
+        //System.out.println("Your Kanban board now is:");
     }
 
 public void fullOutput()
@@ -17,15 +16,6 @@ public void fullOutput()
         mediumOutput();
         lowOutput();
     }
-
-    public void setTask5(String task5) {
-        this.task5 = task5;
-    }
-
-    public String getTask5() {
-        return task5;
-    }
-
     public void urgentOutput()
     {
         printTitle();
