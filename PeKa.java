@@ -8,31 +8,37 @@ import static java.util.UUID.randomUUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.LogRecord;
-import static java.awt.Color.*;
-
 
 public class PeKa {
 
    private static Logger Loger = Logger.getLogger("Inform");
    LogRecord logRecordInfo = new LogRecord(Level.INFO,"All Ok"); //LogRecord xprmnt
    LogRecord logRecordWarn = new LogRecord(Level.WARNING,"Not All OK!");
-   //Color infC = new Color(255,50,0);
 
     public static void main (String[] args) {
         Output presettledOutput = new Output();
         String u;
         String tt;
+        int exxit;
+        int stopAdd;
 
         Task techTask = new Task();
-        Task testAdd = new Task(1,randomUUID(),1,"Nobody",true);
-        //Task task5 = new Task (2,"Yggdrasil");
+        Task testAdd = new Task(0,randomUUID(),3,"",true);
+        //Task[] ForAdd = new Task[5];
+        Task task5 = new Task (2,"Yggdrasil");
 
-        testAdd.addTask();
+       do {
+           Scanner scanStopAdd = new Scanner(System.in);
+           testAdd.addTask();
+           System.out.println("Press 5 for exit, any another digit for continue.");
+           stopAdd = scanStopAdd.nextInt();
+       } while (stopAdd!=5);
+
         tt = testAdd.getContent(testAdd.contentV);//for test
         Loger.info("Added successfully");
 
         Scanner exit = new Scanner(System.in);
-        int exxit;
+
         do {
             System.out.println("Please enter priority first letter: ");
             System.out.println("u - Urgent\nh - High\nm - Medium\nl - Low\nt - Recently added task");
@@ -51,7 +57,7 @@ public class PeKa {
                 case "a" -> {
                     presettledOutput.fullOutput();
                     testAdd.printTaskName();
-                   // task5.printTask();
+                    task5.printTaskName();
                 }
                 case "u" -> {
                     System.out.println("Your task(s) with urgent priority:");
@@ -82,9 +88,12 @@ public class PeKa {
                     testAdd.printAllUUIDs();
                     //task5.printAllUUIDs();
                 }
+                case  "Test" -> {
+                    testAdd.printAllContent();
+                }
                 default -> {
                     System.err.println("Unknown priority");
-                    Loger.warning("Please try yet another time");
+                    Loger.warning("Please try again");
                 }
                    }
             System.out.println("Press 0 for exit, any another digit for continue.");

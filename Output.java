@@ -16,6 +16,8 @@ public void fullOutput()
         mediumOutput();
         lowOutput();
     }
+
+
     public void urgentOutput()
     {
         printTitle();
