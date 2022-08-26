@@ -20,19 +20,41 @@ public class PeKa {
         String u;
         String tt;
         int exxit;
-        int stopAdd;
+        int taskCount;
 
-        Task techTask = new Task();
+        Scanner tskCnt = new Scanner(System.in);
+        System.out.println("How many tasks will you add?");
+        taskCount = tskCnt.nextInt();
+        Loger.info(taskCount + " tasks will add to your kanban panel");
+
+        //Task techTask = new Task();
         Task testAdd = new Task(0,randomUUID(),3,"",true);
-        //Task[] ForAdd = new Task[5];
+        Task Add1 = new Task(0,randomUUID(),3,"",true);
+        Task Add2 = new Task(0,randomUUID(),3,"",true);
+        Task Add3 = new Task(0,randomUUID(),3,"",true);
+        Task Add4 = new Task(0,randomUUID(),3,"",true);
+        Task[] ForAdd = new Task[taskCount];
         Task task5 = new Task (2,"Yggdrasil");
 
-       do {
-           Scanner scanStopAdd = new Scanner(System.in);
-           testAdd.addTask();
-           System.out.println("Press 5 for exit, any another digit for continue.");
-           stopAdd = scanStopAdd.nextInt();
-       } while (stopAdd!=5);
+//        ForAdd[3] = Add3;
+//        ForAdd[4] = Add4;
+
+        if (taskCount==1) {
+            ForAdd[0] = testAdd;
+            ForAdd[0].addTask();
+        } else if (taskCount ==2) {
+            ForAdd[0] = testAdd;
+            ForAdd[0].addTask();
+            ForAdd[1] = Add1;
+            ForAdd[1].addTask();
+        } else if (taskCount==3) {
+            ForAdd[0] = testAdd;
+            ForAdd[0].addTask();
+            ForAdd[1] = Add1;
+            ForAdd[1].addTask();
+            ForAdd[2] = Add2;
+            ForAdd[2].addTask();
+        }
 
         tt = testAdd.getContent(testAdd.contentV);//for test
         Loger.info("Added successfully");
@@ -48,7 +70,9 @@ public class PeKa {
 
             switch (u) {
                 case "t" -> {
-                    testAdd.printTaskFullInfo();
+                    for (int i = 0; i < taskCount; i++) {
+                        ForAdd[i].printTaskFullInfo();
+                    }
                     //task5.printTask();
                     if (tt.length()<2) {
                         Loger.warning("Too short task description"); //ToDo Test this
@@ -56,20 +80,26 @@ public class PeKa {
                 }
                 case "a" -> {
                     presettledOutput.fullOutput();
-                    testAdd.printTaskName();
-                    task5.printTaskName();
+                    for (int i = 0; i < taskCount; i++) {
+                        ForAdd[i].printTaskName();
+                    }
+                    //task5.printTaskName();
                 }
                 case "u" -> {
                     System.out.println("Your task(s) with urgent priority:");
                     presettledOutput.urgentOutput();
                     if (testAdd.priorityV == 0) {
-                       testAdd.printTaskName();
+                        for (int i = 0; i < taskCount; i++) {
+                            ForAdd[i].printTaskName();
+                        }
                     }}
                 case "h" -> {
                 System.out.println("Your high priority task(s):");
                 presettledOutput.highOutput();
                     if (testAdd.priorityV == 1) {
-                        testAdd.printTaskFullInfo();
+                        for (int i = 0; i < taskCount; i++) {
+                            ForAdd[i].printTaskName();
+                        }
                     }}
                 case "m" -> {
                     System.out.println("Your medium priority task(s):");
@@ -85,11 +115,17 @@ public class PeKa {
                         testAdd.printTaskName();
                     }}
                 case "s" -> {
-                    testAdd.printAllUUIDs();
+                    for (int i = 0; i < taskCount; i++) {
+                        ForAdd[i].printAllUUIDs();
+                    }
+
+                    //ForAdd[taskCount].printAllUUIDs(); //ToDo Fix UUID output
                     //task5.printAllUUIDs();
                 }
                 case  "Test" -> {
-                    testAdd.printAllContent();
+                    for (int i = 0; i < taskCount; i++) {
+                        ForAdd[i].printAllContent(); //ToDo Doesn't work
+                    }
                 }
                 default -> {
                     System.err.println("Unknown priority");

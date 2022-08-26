@@ -25,11 +25,6 @@ byte priorityV;
     }
     public Task(){
     };
-    public Task[] ForAdd;
-    {
-        ForAdd = new Task[5];
-    }
-
 
     public void addTask() {
         setContent(contentV);
@@ -87,17 +82,17 @@ public void setPriority (byte priority) {
     public void printTaskName() {
         System.out.println(this.getContent(contentV));
     }
-    public void printAllUUIDs() {
+    public void printAllUUIDs() {// ToDo Don't work cause UUID's now no in task array
         System.out.println("All tasks UUIDs: \n");
         for (UUID uuid:uuidArray) {
             if (this.uuid != null) {
-                System.out.println(uuidArray[number] + " (task #" + this.numberV + ")");
+                System.out.println(uuidArray[numberV] + " (task #" + this.numberV + ")");
                 break;
             }
         }
         System.out.println("Maximum count of tasks with UUID = " + uuidArray.length);
     }
-    public void printAllContent() {
+    public void printAllContent() { //Same that in UUID's output
         for (String con:ContentM) {
         //for (int i = 0; i < ContentM.length; i++) {
                 System.out.println("Task #" + this.numberV + ContentM[number]);
