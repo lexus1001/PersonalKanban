@@ -2,6 +2,7 @@ import java.awt.*;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.UUID;
+import java.io.File;
 
 import static java.util.UUID.nameUUIDFromBytes;
 import static java.util.UUID.randomUUID;
@@ -21,6 +22,7 @@ public class PeKa {
         String tt;
         int exxit;
         int taskCount;
+IO.setIOtasks("Filen");
 
         Scanner tskCnt = new Scanner(System.in);
         System.out.println("How many tasks will you add?");
@@ -35,9 +37,6 @@ public class PeKa {
         Task Add4 = new Task(0,randomUUID(),3,"",true);
         Task[] ForAdd = new Task[taskCount];
         Task task5 = new Task (2,"Yggdrasil");
-
-//        ForAdd[3] = Add3;
-//        ForAdd[4] = Add4;
 
         if (taskCount==1) {
             ForAdd[0] = testAdd;
@@ -56,7 +55,7 @@ public class PeKa {
             ForAdd[2].addTask();
         }
 
-        tt = testAdd.getContent(testAdd.contentV);//for test
+        tt = ForAdd[taskCount-1].getContent(testAdd.contentV);//for test
         Loger.info("Added successfully");
 
         Scanner exit = new Scanner(System.in);
@@ -96,7 +95,7 @@ public class PeKa {
                 case "h" -> {
                 System.out.println("Your high priority task(s):");
                 presettledOutput.highOutput();
-                    if (testAdd.priorityV == 1) {
+                    if (ForAdd[taskCount-1].priorityV == 1) { //ToDo fix array size error
                         for (int i = 0; i < taskCount; i++) {
                             ForAdd[i].printTaskName();
                         }

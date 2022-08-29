@@ -4,7 +4,7 @@ import java.util.UUID;
 public class Task {
 
 public String contentV;
-String[] ContentM = new String[5];
+String[] ContentArray = new String[5];
 byte priorityV;
     UUID[] uuidArray = new UUID[4];
     UUID uuid;
@@ -32,7 +32,6 @@ byte priorityV;
         setNumber(numberV);
         setUuid(uuid);
     }
-
     public int getNumber() {
         number = numberV;
         return number;
@@ -52,12 +51,11 @@ byte priorityV;
     public UUID getUuid(UUID uuid2) {
         return uuid2;
     }
-
 public void setContent (String content) {
     Scanner writeContent = new Scanner(System.in);
     System.out.println("Please enter task content.");
-    ContentM[number] = writeContent.nextLine();
-    this.contentV = ContentM[this.number];
+    ContentArray[number] = writeContent.nextLine();
+    this.contentV = ContentArray[this.number];
 }
     public String getContent(String contnt) {
         contnt = contentV;
@@ -84,18 +82,18 @@ public void setPriority (byte priority) {
     }
     public void printAllUUIDs() {// ToDo Don't work cause UUID's now no in task array
         System.out.println("All tasks UUIDs: \n");
-        for (UUID uuid:uuidArray) {
-            if (this.uuid != null) {
-                System.out.println(uuidArray[numberV] + " (task #" + this.numberV + ")");
-                break;
-            }
-        }
+//        for (UUID uuid:uuidArray) {
+//            if (this.uuid != null) {
+                System.out.println(this.uuid + " (task #" + this.numberV + ")");
+               // break;
+          //  }
+      //  }
         System.out.println("Maximum count of tasks with UUID = " + uuidArray.length);
     }
     public void printAllContent() { //Same that in UUID's output
-        for (String con:ContentM) {
-        //for (int i = 0; i < ContentM.length; i++) {
-                System.out.println("Task #" + this.numberV + ContentM[number]);
-        }
+       // for (String con:ContentArray) {
+     //for (int i = 0; i < ContentArray.length; i++) {
+                System.out.println("Task #" + this.numberV + ": " + this.contentV);
+      //  }
     }
  }
