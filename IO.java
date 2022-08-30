@@ -6,9 +6,11 @@ public class IO {
         String IOS;
         String ios;
 
-        public static void setIOtasks (String ios){
-
+        public static String setIOtasks (){
+            String ios;
             File FileForTasks = new File("C:\\Development\\tasks.txt");
+            ios = FileForTasks.toString();
+            System.out.println("Save file path: " + ios);
             if (FileForTasks.exists()) {
                 System.out.println("File already exists");
             } else {
@@ -17,17 +19,17 @@ public class IO {
                 } catch (IOException e) {
                     System.out.println("Creation error");
                     e.printStackTrace();
-                    ios = FileForTasks.toString();
                     // throw new RuntimeException(e);
                 }
             }
+            return ios;
         }
 
-        public String getIOS () {
+
+    public String getIOS (String IOS) {
             IOS = ios;
             return IOS;
         }
-
 
         public void getIOtasks () {
             System.out.println();

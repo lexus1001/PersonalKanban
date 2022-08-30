@@ -1,10 +1,5 @@
-import java.awt.*;
-import java.util.Properties;
-import java.util.Scanner;
-import java.util.UUID;
-import java.io.File;
 
-import static java.util.UUID.nameUUIDFromBytes;
+import java.util.Scanner;
 import static java.util.UUID.randomUUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,12 +17,16 @@ public class PeKa {
         String tt;
         int exxit;
         int taskCount;
-IO.setIOtasks("Filen");
+
+IO.setIOtasks();
 
         Scanner tskCnt = new Scanner(System.in);
         System.out.println("How many tasks will you add?");
         taskCount = tskCnt.nextInt();
-        Loger.info(taskCount + " tasks will add to your kanban panel");
+      if (taskCount<4) {
+          Loger.info(taskCount + " tasks will add to your kanban panel");
+      } else
+          Loger.warning("Too many tasks!!!11");
 
         //Task techTask = new Task();
         Task testAdd = new Task(0,randomUUID(),3,"",true);
@@ -117,7 +116,6 @@ IO.setIOtasks("Filen");
                     for (int i = 0; i < taskCount; i++) {
                         ForAdd[i].printAllUUIDs();
                     }
-
                     //ForAdd[taskCount].printAllUUIDs(); //ToDo Fix UUID output
                     //task5.printAllUUIDs();
                 }

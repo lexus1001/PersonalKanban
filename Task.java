@@ -96,4 +96,8 @@ public void setPriority (byte priority) {
                 System.out.println("Task #" + this.numberV + ": " + this.contentV);
       //  }
     }
+    public int CAl(int contlenght) {
+        contlenght=ContentArray.length;
+        return contlenght;
+    }
  }
