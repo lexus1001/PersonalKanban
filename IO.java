@@ -3,40 +3,50 @@ import java.io.IOException;
 
 public class IO {
 
-        String IOS;
+    String IOS;
+    String ios;
+
+    public static String setIOtasks() {
         String ios;
+        File FileForTasks = new File("C:\\Development\\tasks.txt");
+        ios = FileForTasks.getName();
+        System.out.println("Save file path for tasks: " + ios);
 
-        public static String setIOtasks (){
-            String ios;
-            File FileForTasks = new File("C:\\Development\\tasks.txt");
-            ios = FileForTasks.toString();
-            System.out.println("Save file path: " + ios);
-            if (FileForTasks.exists()) {
-                System.out.println("File already exists");
-            } else {
-                try {
-                    FileForTasks.createNewFile();
-                } catch (IOException e) {
-                    System.out.println("Creation error");
-                    e.printStackTrace();
-                    // throw new RuntimeException(e);
-                }
+        if (FileForTasks.exists()) {
+            System.out.println("File already exists in " + FileForTasks.getPath());
+        } else {
+            try {
+                FileForTasks.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Creation error");
+                e.printStackTrace();
+                // throw new RuntimeException(e);
             }
-            return ios;
         }
-
-
-    public String getIOS (String IOS) {
-            IOS = ios;
-            return IOS;
-        }
-
-        public void getIOtasks () {
-            System.out.println();
-        }
-
-        public void printFilename () {
-            System.out.println(ios);
-        }
-
+        return ios;
     }
+
+    public static String setIOUIIDs() {
+        String ios2;
+        File FileForUUIDs = new File("UUIDs.txt");
+        ios2 = String.valueOf(FileForUUIDs);
+        System.out.println("UUIDs is saved in " + ios2);
+        if (FileForUUIDs.exists()) {
+            System.out.println(String.format("File for UUIDs already exists on path " + FileForUUIDs.getAbsoluteFile() + " and last modificate " + FileForUUIDs.getFreeSpace()));
+        }
+        else {
+            try {
+                FileForUUIDs.createNewFile();
+            } catch (IOException u) {
+                u.printStackTrace();
+            }
+        }
+        return ios2;
+    }
+
+
+    public String getIOS(String IOS) {
+        this.IOS = ios;
+        return IOS;
+    }
+}

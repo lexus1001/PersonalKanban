@@ -19,6 +19,7 @@ public class PeKa {
         int taskCount;
 
 IO.setIOtasks();
+IO.setIOUIIDs();
 
         Scanner tskCnt = new Scanner(System.in);
         System.out.println("How many tasks will you add?");
@@ -130,6 +131,7 @@ IO.setIOtasks();
                 }
                    }
             System.out.println("Press 0 for exit, any another digit for continue.");
+
             exxit = exit.nextInt();
         } while(exxit!=0);
     }
