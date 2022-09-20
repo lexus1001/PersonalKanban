@@ -1,9 +1,10 @@
-
+import java.time.LocalDateTime;
 import java.util.Scanner;
-import static java.util.UUID.randomUUID;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.logging.LogRecord;
+import java.util.logging.Logger;
+
+import static java.util.UUID.randomUUID;
 
 public class PeKa {
 
@@ -18,7 +19,8 @@ public class PeKa {
         int exxit;
         int taskCount;
 
-IO.setIOtasks();
+        System.out.println("Current time: " + LocalDateTime.now());
+        IO.setIOtasks();
 IO.setIOUIIDs();
 
         Scanner tskCnt = new Scanner(System.in);

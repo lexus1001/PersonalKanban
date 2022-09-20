@@ -81,7 +81,6 @@ public void setPriority (byte priority) {
         System.out.println(this.getContent(contentV));
     }
     public void printAllUUIDs() {// ToDo Don't work cause UUID's now no in task array
-        System.out.println("All tasks UUIDs: \n");
 //        for (UUID uuid:uuidArray) {
 //            if (this.uuid != null) {
                 System.out.println(this.uuid + " (task #" + this.numberV + ")");
