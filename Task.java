@@ -80,6 +80,8 @@ public void setPriority (byte priority) {
     public void printTaskName() {
         System.out.println(this.getContent(contentV));
     }
+
+    @Deprecated
     public void printAllUUIDs() {// ToDo Don't work cause UUID's now no in task array
 //        for (UUID uuid:uuidArray) {
 //            if (this.uuid != null) {

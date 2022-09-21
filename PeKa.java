@@ -118,6 +118,7 @@ IO.setIOUIIDs();
                 case "s" -> {
                     for (int i = 0; i < taskCount; i++) {
                         ForAdd[i].printAllUUIDs();
+                        Options.printNames();
                     }
                     //ForAdd[taskCount].printAllUUIDs(); //ToDo Fix UUID output
                     //task5.printAllUUIDs();
@@ -126,6 +127,7 @@ IO.setIOUIIDs();
                     for (int i = 0; i < taskCount; i++) {
                         ForAdd[i].printAllContent(); //ToDo Doesn't work
                     }
+                    IO.readTaskContent();
                 }
                 default -> {
                     System.err.println("Unknown priority");
