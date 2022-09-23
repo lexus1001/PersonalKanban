@@ -3,9 +3,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.attribute.FileTime;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class IO {
+
+    String[] ContentArray = new String[5];
+
+
 
 
     public static void setIOtasks() {
@@ -50,21 +56,38 @@ public class IO {
         }
     }
 
-    public static void readTaskContent () {
+    public static String[] readTaskContent () throws FileNotFoundException {
         String iot = Options.setTaskFilename();
         String path = String.format("C:\\Development\\%s", iot);
         File FileForTasks = new File(path);
-        try {
             Scanner ContentReader = new Scanner(FileForTasks);
-            while (ContentReader.hasNextLine()) {
-                System.out.println(ContentReader.nextLine());
-            }
-        } catch (FileNotFoundException fff) {
-            fff.printStackTrace();
+            String tasksLine = ContentReader.nextLine();
+            String[] oneTask = tasksLine.split(", ");
+            ContentReader.close();
+
+        return oneTask;
+    }
+
+    public static int[] readTaskNumber () throws FileNotFoundException {
+        String ion = Options.setNumberFilename();
+        String path = String.format("C:\\Development\\%s", ion);
+        File FileForNumbers = new File(path);
+        Scanner NumbersReader = new Scanner(FileForNumbers);
+        String numbersLine = NumbersReader.nextLine();
+        String[] oneNumber = numbersLine.split(" ");
+        int[] numbersN = new int[oneNumber.length];
+        int numbersCounter = 0;
+        for (String number : oneNumber) {
+            numbersN[numbersCounter++] = Integer.parseInt(number);
+
         }
+        NumbersReader.close();
+    return numbersN ;
     }
 
-    public static void readTaskNumber () {
-
-    }
+//    public static UUID[] readTaskUUID() {
+//
+//
+//        return ;
+//    }
 }

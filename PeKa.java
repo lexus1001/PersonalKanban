@@ -1,5 +1,8 @@
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -8,11 +11,33 @@ import static java.util.UUID.randomUUID;
 
 public class PeKa {
 
+    static int[] Numbers;
+
+    static {
+        try {
+            Numbers = IO.readTaskNumber();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static String[] Tasks;
+
+    static {
+        try {
+            Tasks = IO.readTaskContent();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
    private static Logger Loger = Logger.getLogger("Inform");
    LogRecord logRecordInfo = new LogRecord(Level.INFO,"All Ok"); //LogRecord xprmnt
-   LogRecord logRecordWarn = new LogRecord(Level.WARNING,"Not All OK!");
 
-    public static void main (String[] args) {
+    public PeKa() throws FileNotFoundException {
+    }
+
+    public static void main (String[] args) throws FileNotFoundException {
         Output presettledOutput = new Output();
         String u;
         String tt;
@@ -22,6 +47,9 @@ public class PeKa {
         System.out.println("Current time: " + LocalDateTime.now());
         IO.setIOtasks();
 IO.setIOUIIDs();
+
+        System.out.println(Arrays.toString(Tasks));
+        System.out.println(Arrays.toString(Numbers));
 
         Scanner tskCnt = new Scanner(System.in);
         System.out.println("How many tasks will you add?");
@@ -35,10 +63,7 @@ IO.setIOUIIDs();
         Task testAdd = new Task(0,randomUUID(),3,"",true);
         Task Add1 = new Task(0,randomUUID(),3,"",true);
         Task Add2 = new Task(0,randomUUID(),3,"",true);
-        Task Add3 = new Task(0,randomUUID(),3,"",true);
-        Task Add4 = new Task(0,randomUUID(),3,"",true);
         Task[] ForAdd = new Task[taskCount];
-        Task task5 = new Task (2,"Yggdrasil");
 
         if (taskCount==1) {
             ForAdd[0] = testAdd;
@@ -84,7 +109,7 @@ IO.setIOUIIDs();
                     for (int i = 0; i < taskCount; i++) {
                         ForAdd[i].printTaskName();
                     }
-                    //task5.printTaskName();
+                    IO.readTaskContent();
                 }
                 case "u" -> {
                     System.out.println("Your task(s) with urgent priority:");
@@ -104,10 +129,10 @@ IO.setIOUIIDs();
                     }}
                 case "m" -> {
                     System.out.println("Your medium priority task(s):");
-                    presettledOutput.mediumOutput();
                     if (testAdd.priorityV == 2) {
                         testAdd.printTaskName();
                     }
+                    System.out.println("Task number " + Numbers[testAdd.number] + " : " + Tasks[testAdd.number]);
                 }
                 case "l" -> {
                     System.out.println("Your low priority task(s):");
@@ -118,15 +143,10 @@ IO.setIOUIIDs();
                 case "s" -> {
                     for (int i = 0; i < taskCount; i++) {
                         ForAdd[i].printAllUUIDs();
-                        Options.printNames();
+                        Output.printNames();
                     }
-                    //ForAdd[taskCount].printAllUUIDs(); //ToDo Fix UUID output
-                    //task5.printAllUUIDs();
                 }
                 case  "Test" -> {
-                    for (int i = 0; i < taskCount; i++) {
-                        ForAdd[i].printAllContent(); //ToDo Doesn't work
-                    }
                     IO.readTaskContent();
                 }
                 default -> {
