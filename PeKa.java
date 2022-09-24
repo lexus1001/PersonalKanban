@@ -1,22 +1,41 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import static java.util.UUID.randomUUID;
 
 public class PeKa {
 
+    static int[] Priorities;
+    static {
+        try{
+            Priorities = IO.readTaskPriority();
+        }catch (IOException | ParseException ep) {
+            throw new RuntimeException(ep);
+        }
+    }
+
+    static UUID[] UUIDs;
+
+    static {
+        try {
+            UUIDs = IO.readTaskUUID();
+        }catch (IOException eu) {
+            throw new RuntimeException(eu);
+        }
+    }
+
     static int[] Numbers;
 
     static {
         try {
             Numbers = IO.readTaskNumber();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | ParseException e) {
             throw new RuntimeException(e);
         }
     }
@@ -32,7 +51,6 @@ public class PeKa {
     }
 
    private static Logger Loger = Logger.getLogger("Inform");
-   LogRecord logRecordInfo = new LogRecord(Level.INFO,"All Ok"); //LogRecord xprmnt
 
     public PeKa() throws FileNotFoundException {
     }
@@ -46,10 +64,15 @@ public class PeKa {
 
         System.out.println("Current time: " + LocalDateTime.now());
         IO.setIOtasks();
-IO.setIOUIIDs();
+        try {
+            IO.readTaskUUID();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         System.out.println(Arrays.toString(Tasks));
         System.out.println(Arrays.toString(Numbers));
+        System.out.println(Arrays.toString(UUIDs));
 
         Scanner tskCnt = new Scanner(System.in);
         System.out.println("How many tasks will you add?");
@@ -60,6 +83,7 @@ IO.setIOUIIDs();
           Loger.warning("Too many tasks!!!11");
 
         //Task techTask = new Task();
+        Task testFile = new Task (1, UUIDs[1],2,"", true);
         Task testAdd = new Task(0,randomUUID(),3,"",true);
         Task Add1 = new Task(0,randomUUID(),3,"",true);
         Task Add2 = new Task(0,randomUUID(),3,"",true);
@@ -132,7 +156,7 @@ IO.setIOUIIDs();
                     if (testAdd.priorityV == 2) {
                         testAdd.printTaskName();
                     }
-                    System.out.println("Task number " + Numbers[testAdd.number] + " : " + Tasks[testAdd.number]);
+                    System.out.println("Task number " + Numbers[testFile.number] + " : " + Tasks[testFile.number] + " with UUID = " + UUIDs[testFile.number] + " and priority " + Priorities[testFile.number]);
                 }
                 case "l" -> {
                     System.out.println("Your low priority task(s):");
