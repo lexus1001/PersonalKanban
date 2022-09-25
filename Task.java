@@ -12,13 +12,9 @@ byte priorityV;
     int numberV;
 
     public Task (int number, UUID uuid2, int priority, String content, boolean active) {
-//        for (int i = 1; i < uuidArray.length; i++) {
-//            uuidArray[i]=UUID.randomUUID();
-//            uuidArray[number]=this.uuid1;
     }
     public Task (int priority, String content)
-    {
-    };
+    {};
     public Task (String content)
     {
         setContent(contentV);
@@ -46,8 +42,7 @@ byte priorityV;
         uuidArray[number] = UUID.randomUUID();
             this.uuid = uuidArray[this.number];
         }
-//        UUID uuid = uuidArray[uid];
-//        this.uuid1=UUID.randomUUID();
+
     public UUID getUuid(UUID uuid2) {
         return uuid2;
     }
@@ -80,6 +75,8 @@ public void setPriority (byte priority) {
     public void printTaskName() {
         System.out.println(this.getContent(contentV));
     }
+
+    @Deprecated
     public void printAllUUIDs() {// ToDo Don't work cause UUID's now no in task array
 //        for (UUID uuid:uuidArray) {
 //            if (this.uuid != null) {
@@ -88,15 +85,5 @@ public void setPriority (byte priority) {
           //  }
       //  }
         System.out.println("Maximum count of tasks with UUID = " + uuidArray.length);
-    }
-    public void printAllContent() { //Same that in UUID's output
-       // for (String con:ContentArray) {
-     //for (int i = 0; i < ContentArray.length; i++) {
-                System.out.println("Task #" + this.numberV + ": " + this.contentV);
-      //  }
-    }
-    public int CAl(int contlenght) {
-        contlenght=ContentArray.length;
-        return contlenght;
     }
  }
