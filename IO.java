@@ -10,9 +10,6 @@ public class IO {
 
     String[] ContentArray = new String[5];
 
-
-
-
     public static void setIOtasks() {
         String iot = Options.setTaskFilename();
         String path = String.format("C:\\Development\\%s", iot);
@@ -79,11 +76,10 @@ public class IO {
 
         }
         NumbersReader.close();
-    return numbersN ;
+    return numbersN;
     }
 
     public static UUID[] readTaskUUID() throws IOException {
-        String oneUUID;
         String iou = Options.setUUIDFilename();
         String path = String.format("C:\\Development\\%s", iou);
         File FileForUUIDs = new File(path);
@@ -96,7 +92,6 @@ public class IO {
         FFUReader.close();
         for (String UUID : UUIDstring) {
             NativeUUIDs[UUIDCounter++] = java.util.UUID.fromString(UUIDstring[UUIDCounter-1]);
-            System.out.println(NativeUUIDs);
         }
         return NativeUUIDs;
     }
@@ -115,7 +110,7 @@ public class IO {
 
         }
         PriorityReader.close();
-        return prioritiesN ;
+        return prioritiesN;
     }
 
 }

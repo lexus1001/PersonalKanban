@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.logging.Logger;
-
 import static java.util.UUID.randomUUID;
 
 public class PeKa {
@@ -19,9 +18,7 @@ public class PeKa {
             throw new RuntimeException(ep);
         }
     }
-
     static UUID[] UUIDs;
-
     static {
         try {
             UUIDs = IO.readTaskUUID();
@@ -29,9 +26,7 @@ public class PeKa {
             throw new RuntimeException(eu);
         }
     }
-
     static int[] Numbers;
-
     static {
         try {
             Numbers = IO.readTaskNumber();
@@ -39,9 +34,7 @@ public class PeKa {
             throw new RuntimeException(e);
         }
     }
-
     static String[] Tasks;
-
     static {
         try {
             Tasks = IO.readTaskContent();
@@ -62,17 +55,8 @@ public class PeKa {
         int exxit;
         int taskCount;
 
-        System.out.println("Current time: " + LocalDateTime.now());
+System.out.println("Current time: " + LocalDateTime.now());
         IO.setIOtasks();
-        try {
-            IO.readTaskUUID();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        System.out.println(Arrays.toString(Tasks));
-        System.out.println(Arrays.toString(Numbers));
-        System.out.println(Arrays.toString(UUIDs));
 
         Scanner tskCnt = new Scanner(System.in);
         System.out.println("How many tasks will you add?");
@@ -171,7 +155,10 @@ public class PeKa {
                     }
                 }
                 case  "Test" -> {
-                    IO.readTaskContent();
+                    System.out.println("All tasks: " + Arrays.toString(Tasks));
+                    System.out.println("All numbers: " + Arrays.toString(Numbers));
+                    System.out.println(Arrays.toString(UUIDs));
+                    System.out.println("All priorities: " + Arrays.toString(Priorities));
                 }
                 default -> {
                     System.err.println("Unknown priority");
@@ -179,7 +166,6 @@ public class PeKa {
                 }
                    }
             System.out.println("Press 0 for exit, any another digit for continue.");
-
             exxit = exit.nextInt();
         } while(exxit!=0);
     }
