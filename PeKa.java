@@ -53,44 +53,51 @@ public class PeKa {
         String u;
         String tt;
         int exxit;
-        int taskCount;
+        int taskCount=1;
+        String mode;
 
-System.out.println("Current time: " + LocalDateTime.now());
-        IO.setIOtasks();
-
-        Scanner tskCnt = new Scanner(System.in);
-        System.out.println("How many tasks will you add?");
-        taskCount = tskCnt.nextInt();
-      if (taskCount<4) {
-          Loger.info(taskCount + " tasks will add to your kanban panel");
-      } else
-          Loger.warning("Too many tasks!!!11");
-
-        //Task techTask = new Task();
-        Task testFile = new Task (1, UUIDs[1],2,"", true);
-        Task testAdd = new Task(0,randomUUID(),3,"",true);
-        Task Add1 = new Task(0,randomUUID(),3,"",true);
-        Task Add2 = new Task(0,randomUUID(),3,"",true);
+        Task testFile = new Task(1, UUIDs[1], 2, "", true);
+        Task testAdd = new Task(0, randomUUID(), 3, "", true);
+        Task Add1 = new Task(0, randomUUID(), 3, "", true);
+        Task Add2 = new Task(0, randomUUID(), 3, "", true);
         Task[] ForAdd = new Task[taskCount];
 
-        if (taskCount==1) {
-            ForAdd[0] = testAdd;
-            ForAdd[0].addTask();
-        } else if (taskCount ==2) {
-            ForAdd[0] = testAdd;
-            ForAdd[0].addTask();
-            ForAdd[1] = Add1;
-            ForAdd[1].addTask();
-        } else if (taskCount==3) {
-            ForAdd[0] = testAdd;
-            ForAdd[0].addTask();
-            ForAdd[1] = Add1;
-            ForAdd[1].addTask();
-            ForAdd[2] = Add2;
-            ForAdd[2].addTask();
-        }
+System.out.println("Current time: " + LocalDateTime.now());
+       // IO.setIOtasks();
 
-        tt = ForAdd[taskCount-1].getContent(testAdd.contentV);//for test
+        Scanner enterTask = new Scanner(System.in);
+        System.out.println("Wanna enter new task(s)?");
+        mode = enterTask.nextLine();
+        if (mode.equals("y")) {
+
+            Scanner tskCnt = new Scanner(System.in);
+            System.out.println("How many tasks will you add?");
+            taskCount = tskCnt.nextInt();
+            if (taskCount < 4) {
+                Loger.info(taskCount + " tasks will add to your kanban panel");
+            } else
+                Loger.warning("Too many tasks!!!11");
+
+            if (taskCount == 1) {
+                ForAdd[0] = testAdd;
+                ForAdd[0].addTask();
+            } else if (taskCount == 2) {
+                ForAdd[0] = testAdd;
+                ForAdd[0].addTask();
+                ForAdd[1] = Add1;
+                ForAdd[1].addTask();
+            } else if (taskCount == 3) {
+                ForAdd[0] = testAdd;
+                ForAdd[0].addTask();
+                ForAdd[1] = Add1;
+                ForAdd[1].addTask();
+                ForAdd[2] = Add2;
+                ForAdd[2].addTask();
+            }
+        } else
+        {
+
+       // tt = ForAdd[taskCount-1].getContent(testAdd.contentV);//for test
         Loger.info("Added successfully");
 
         Scanner exit = new Scanner(System.in);
@@ -105,17 +112,17 @@ System.out.println("Current time: " + LocalDateTime.now());
             switch (u) {
                 case "t" -> {
                     for (int i = 0; i < taskCount; i++) {
-                        ForAdd[i].printTaskFullInfo();
+                     //   ForAdd[i].printTaskFullInfo();
                     }
                     //task5.printTask();
-                    if (tt.length()<2) {
+                   // if (tt.length()<2) {
                         Loger.warning("Too short task description"); //ToDo Test this
-                    }
+               //     }
                 }
                 case "a" -> {
                     presettledOutput.fullOutput();
                     for (int i = 0; i < taskCount; i++) {
-                        ForAdd[i].printTaskName();
+                 //       ForAdd[i].printTaskName();
                     }
                     IO.readTaskContent();
                 }
@@ -124,7 +131,7 @@ System.out.println("Current time: " + LocalDateTime.now());
                     presettledOutput.urgentOutput();
                     if (testAdd.priorityV == 0) {
                         for (int i = 0; i < taskCount; i++) {
-                            ForAdd[i].printTaskName();
+                        //    ForAdd[i].printTaskName();
                         }
                     }}
                 case "h" -> {
@@ -132,7 +139,7 @@ System.out.println("Current time: " + LocalDateTime.now());
                 presettledOutput.highOutput();
                     if (ForAdd[taskCount-1].priorityV == 1) { //ToDo fix array size error
                         for (int i = 0; i < taskCount; i++) {
-                            ForAdd[i].printTaskName();
+                         //   ForAdd[i].printTaskName();
                         }
                     }}
                 case "m" -> {
@@ -150,7 +157,6 @@ System.out.println("Current time: " + LocalDateTime.now());
                     }}
                 case "s" -> {
                     for (int i = 0; i < taskCount; i++) {
-                        ForAdd[i].printAllUUIDs();
                         Output.printNames();
                     }
                 }
@@ -168,5 +174,6 @@ System.out.println("Current time: " + LocalDateTime.now());
             System.out.println("Press 0 for exit, any another digit for continue.");
             exxit = exit.nextInt();
         } while(exxit!=0);
+    }
     }
     }
