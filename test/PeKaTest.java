@@ -1,19 +1,23 @@
 import org.testng.Assert;
-import org.testng.annotations.*;
-//import static org.hamcrest.Matchers.*;
-//import static asserters.Matcher.assertThatWithWait;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.UUID;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
+//import static org.testng.AssertJUnit.assertEquals;
 
 public class PeKaTest {
 
-    static int[] Priorities;
+    private static int[] Priorities;
+    private static UUID testUUID = UUID.randomUUID();
+    private static String testTask = "rgbjlf";
+    private static int testNumber = 2;
+    private String input;
 
     static {
         try {
@@ -23,7 +27,7 @@ public class PeKaTest {
         }
     }
 
-    static UUID[] UUIDs;
+    private static UUID[] UUIDs;
 
     static {
         try {
@@ -33,7 +37,7 @@ public class PeKaTest {
         }
     }
 
-    static int[] Numbers;
+    private static int[] Numbers;
 
     static {
         try {
@@ -43,7 +47,7 @@ public class PeKaTest {
         }
     }
 
-    static String[] Tasks;
+    private static String[] Tasks;
 
     static {
         try {
@@ -54,27 +58,38 @@ public class PeKaTest {
     }
 
     @Test(description = "Test arrays parsing from content file", priority = 0, successPercentage = 97, testName = "Test content file reading")
-    private void TaskArrayTest() {
-Tasks[2]="5";
-        Assert.assertEquals(Tasks[2], "67ohfu2houi");
+    public void TaskArrayTest() {
+        input = Tasks[2];
+        Assert.assertEquals(input, testUUID, "random message");
 
         assertNotEquals(UUIDs[2], null);
         assertNotNull(Priorities);
-    }
-
-    @Test (testName = "Test numbers file reading")
-    private void NumberArrayTest() {
-        assertEquals(Numbers[2], 13);
     }
 
     @Test(description = "Test arrays parsing from UUID file", priority = 1, timeOut = 3255, testName = "Test UUID file reading")
-    private void UUIDArrayTest() {
-        assertNotEquals(UUIDs[2], null);
+    public void UUIDArrayTest() {
+        assertNotEquals(UUIDs[2], null, "UUIDs file not null");
     }
 
-    @Test(description = "Test arrays parsing from priority file", priority = 1,testName = "Test Priority file reading", alwaysRun = true)
-    private void PriorityArrayTest() {
-        assertNotNull(Priorities);
+    @Test(description = "Test arrays parsing from priority file", priority = 1, testName = "Test Priority file reading", alwaysRun = true)
+    public void PriorityArrayTest() {
+        assertNotNull(Priorities, "Priorities not null");
+    }
+
+    @Test(description = "Test from data provider", dataProvider = "Files")
+    public void summaryTest(String input, String expected) {
+        String result = input;
+        Assert.assertEquals(result, expected, "random message" + expected);
+    }
+
+    @DataProvider(name = "Files")
+    public Object[][] testObj() {
+        return new Object[][]{
+                {Tasks[0], testTask},
+                {UUIDs[0].toString(), testUUID.toString()},
+                {Numbers[0], testNumber},
+                {Priorities[0], 2}
+        };
     }
 
 }
