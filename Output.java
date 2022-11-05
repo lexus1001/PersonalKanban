@@ -29,9 +29,9 @@ public void fullOutput()
         System.out.println(task4);
     }
 
-    public static void printNames() {
+    public static void printPaths() {
         System.out.println("File name for numbers: " + Options.setNumberFilename());
-        System.out.println("File name for tasks: " + Options.setTaskFilename());
+        System.out.println("File name for tasks: " + Options.setTaskPath());
         System.out.println("File name for priorities: " + Options.setPriorityFilename());
         System.out.println("File name for UUIDs: " + Options.setUUIDFilename());
     }

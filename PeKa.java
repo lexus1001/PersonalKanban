@@ -10,7 +10,9 @@ import static java.util.UUID.randomUUID;
 
 public class PeKa {
 
-    static int[] Priorities;
+    String path = Options.setTaskPath();
+
+    private static int[] Priorities;
     static {
         try{
             Priorities = IO.readTaskPriority();
@@ -18,7 +20,7 @@ public class PeKa {
             throw new RuntimeException(ep);
         }
     }
-    static UUID[] UUIDs;
+    private static UUID[] UUIDs;
     static {
         try {
             UUIDs = IO.readTaskUUID();
@@ -26,7 +28,7 @@ public class PeKa {
             throw new RuntimeException(eu);
         }
     }
-    static int[] Numbers;
+    private static int[] Numbers;
     static {
         try {
             Numbers = IO.readTaskNumber();
@@ -34,13 +36,9 @@ public class PeKa {
             throw new RuntimeException(e);
         }
     }
-    static String[] Tasks;
+    public static String[] Tasks;
     static {
-        try {
-            Tasks = IO.readTaskContent();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        Tasks = IO.readTaskContent();
     }
 
    private static Logger Loger = Logger.getLogger("Inform");
@@ -60,7 +58,7 @@ public class PeKa {
         Task testAdd = new Task(0, randomUUID(), 3, "", true);
         Task Add1 = new Task(0, randomUUID(), 3, "", true);
         Task Add2 = new Task(0, randomUUID(), 3, "", true);
-        Task[] ForAdd = new Task[taskCount];
+        Task[] ForAdd = new Task[taskCount+1];
 
 System.out.println("Current time: " + LocalDateTime.now());
        // IO.setIOtasks();
@@ -111,18 +109,11 @@ System.out.println("Current time: " + LocalDateTime.now());
 
             switch (u) {
                 case "t" -> {
-                    for (int i = 0; i < taskCount; i++) {
-                     //   ForAdd[i].printTaskFullInfo();
-                    }
-                    //task5.printTask();
-                   // if (tt.length()<2) {
-                        Loger.warning("Too short task description"); //ToDo Test this
-               //     }
+                    System.out.println("Nothing to output");
                 }
                 case "a" -> {
                     presettledOutput.fullOutput();
                     for (int i = 0; i < taskCount; i++) {
-                 //       ForAdd[i].printTaskName();
                     }
                     IO.readTaskContent();
                 }
@@ -157,7 +148,7 @@ System.out.println("Current time: " + LocalDateTime.now());
                     }}
                 case "s" -> {
                     for (int i = 0; i < taskCount; i++) {
-                        Output.printNames();
+                        Output.printPaths();
                     }
                 }
                 case  "Test" -> {

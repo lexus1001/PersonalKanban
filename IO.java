@@ -1,3 +1,5 @@
+import org.apache.kafka.common.quota.ClientQuotaAlteration;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.attribute.FileTime;
@@ -10,9 +12,12 @@ public class IO {
 
     String[] ContentArray = new String[5];
 
-    public static void setIOtasks() {
-        String iot = Options.setTaskFilename();
-        String path = String.format("C:\\Development\\%s", iot);
+    public IO (String path) {
+    }
+
+    public static void setIOtasks(String path) {
+//        String iot = Options.setTaskFilename();
+//        String path = String.format("C:\\Development\\%s", iot);
         File FileForTasks = new File(path);
         if (FileForTasks.exists()) {
             System.out.println("File already exists in " + FileForTasks.getPath());
@@ -50,16 +55,20 @@ public class IO {
         }
     }
 
-    public static String[] readTaskContent () throws FileNotFoundException {
-        String iot = Options.setTaskFilename();
-        String path = String.format("C:\\Development\\%s", iot);
+    public static String[] readTaskContent (){
+        String path = Options.setTaskPath();
         File FileForTasks = new File(path);
-            Scanner ContentReader = new Scanner(FileForTasks);
-            String tasksLine = ContentReader.nextLine();
-            String[] oneTask = tasksLine.split(", ");
-            ContentReader.close();
+        Scanner ContentReader = null;
+            try {
+                ContentReader = new Scanner(FileForTasks);
 
+        String tasksLine = ContentReader.nextLine();
+        String[] oneTask = tasksLine.split(", ");
+        ContentReader.close();
         return oneTask;
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
     }
 
     public static int[] readTaskNumber () throws FileNotFoundException, ParseException {

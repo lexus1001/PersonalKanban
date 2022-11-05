@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -51,7 +53,17 @@ public void setContent (String content) {
     System.out.println("Please enter task content.");
     ContentArray[number] = writeContent.nextLine();
     this.contentV = ContentArray[this.number];
-}
+    //IO.setIOtasks(Options.setTaskPath());
+    PrintWriter pwTasks = null;
+        try {
+            pwTasks = new PrintWriter(Options.setTaskPath());
+            pwTasks.println(writeContent.nextLine());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        pwTasks.close();
+    }
     public String getContent(String contnt) {
         contnt = contentV;
         return contnt;

@@ -1,15 +1,19 @@
+import org.testng.*;
 import org.testng.Assert;
+import org.testng.AssertJUnit;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
+import org.testng.internal.reflect.MethodMatcherException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.UUID;
-
+import java.util.regex.Matcher;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
-//import static org.testng.AssertJUnit.assertEquals;
+import static org.hamcrest.Matcher.*;
 
 public class PeKaTest {
 
@@ -59,10 +63,10 @@ public class PeKaTest {
 
     @Test(description = "Test arrays parsing from content file", priority = 0, successPercentage = 97, testName = "Test content file reading")
     public void TaskArrayTest() {
-        input = Tasks[2];
-        Assert.assertEquals(input, testUUID, "random message");
+        input = Tasks[0];
+        Assert.assertEquals(input, testTask, "random message");
 
-        assertNotEquals(UUIDs[2], null);
+        assertNotEquals(Tasks[2], null);
         assertNotNull(Priorities);
     }
 
@@ -76,10 +80,14 @@ public class PeKaTest {
         assertNotNull(Priorities, "Priorities not null");
     }
 
-    @Test(description = "Test from data provider", dataProvider = "Files")
+    @Test(description = "Test from data provider", dataProvider = "Files",
+    expectedExceptions = org.testng.TestException.class, expectedExceptionsMessageRegExp = "No digit")
     public void summaryTest(String input, String expected) {
         String result = input;
         Assert.assertEquals(result, expected, "random message" + expected);
+        org.hamcrest.Matchers.contains(0);
+        AssertJUnit.assertEquals("Test success!!!", result, expected);
+
     }
 
     @DataProvider(name = "Files")
