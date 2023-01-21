@@ -1,10 +1,7 @@
-import org.apache.kafka.common.quota.ClientQuotaAlteration;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.attribute.FileTime;
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -12,8 +9,6 @@ public class IO {
 
     String[] ContentArray = new String[5];
 
-    public IO (String path) {
-    }
 
     public static void setIOtasks(String path) {
 //        String iot = Options.setTaskFilename();
@@ -107,7 +102,7 @@ public class IO {
 
     public static int[] readTaskPriority () throws FileNotFoundException, ParseException {
         String iop = Options.setPriorityFilename();
-        String path = String.format("C:\\Development\\%s", iop);
+        String path = String.format(iop);
         File FileForPriorities = new File(path);
         Scanner PriorityReader = new Scanner(FileForPriorities);
         String priorityLine = PriorityReader.nextLine();
@@ -122,4 +117,25 @@ public class IO {
         return prioritiesN;
     }
 
+    public static Task writeTask(Task tsk) {
+                try {
+                    FileOutputStream wrTask = new FileOutputStream(Options.taskName());
+                    ObjectOutputStream wrTas = new ObjectOutputStream(wrTask);
+                    wrTas.writeObject(tsk);
+                    wrTas.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+        return tsk;
+    }
+
+
+//    public static Task readTestAdd() {
+//        String iota = Options.taskName();
+//        String path = String.format(iota);
+//
+//
+//
+//    }
+//    return ;
 }

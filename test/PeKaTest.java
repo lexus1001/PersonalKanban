@@ -54,11 +54,7 @@ public class PeKaTest {
     private static String[] Tasks;
 
     static {
-        try {
-            Tasks = IO.readTaskContent();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        Tasks = IO.readTaskContent();
     }
 
     @Test(description = "Test arrays parsing from content file", priority = 0, successPercentage = 97, testName = "Test content file reading")
