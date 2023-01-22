@@ -1,17 +1,10 @@
 public class Output {
     public final String task1 = "Wake up";
-    private final String task2 = "Daily meeting";
-    private final String task4 = "Eat";
 
-    void printTitle(){
-
-        //System.out.println("Your Kanban board now is:");
-    }
 public void fullOutput()
     {
         urgentOutput();
         highOutput();
-        lowOutput();
     }
     public void urgentOutput()
     {
@@ -19,21 +12,15 @@ public void fullOutput()
     }
     public void highOutput()
     {
-        printTitle();
+        String task2 = "Daily meeting";
         System.out.println(task2);
     }
-
-    public void lowOutput()
-    {
-        printTitle();
-        System.out.println(task4);
-    }
-
     public static void printPaths() {
         System.out.println("File name for numbers: " + Options.setNumberFilename());
         System.out.println("File name for tasks: " + Options.setTaskPath());
         System.out.println("File name for priorities: " + Options.setPriorityFilename());
         System.out.println("File name for UUIDs: " + Options.setUUIDFilename());
+        System.out.println("File name for added task: " + Options.taskName());
     }
 
 }

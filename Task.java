@@ -3,10 +3,8 @@ import java.util.Scanner;
 import java.util.UUID;
 
 public class Task implements Serializable {
-
 public String contentV;
 String[] ContentArray = new String[5];
-
 byte priorityV;
     UUID[] uuidArray = new UUID[4];
     UUID uuid;
@@ -15,20 +13,16 @@ byte priorityV;
 
     public Task (int number, UUID uuid2, int priority, String content, boolean active) {
     }
-    public Task (int priority, String content)
-    {};
-    public Task (String content)
-    {
-        setContent(contentV);
+    public Task (int number, int priority, String content){
+
     }
     public Task(){
     };
-
     public void addTask() {
         setContent(contentV);
         setPriority(priorityV);
         setNumber(numberV);
-        setUuid(uuid);
+       // setUuid(uuid);
     }
     public int getNumber() {
         number = numberV;
@@ -85,5 +79,4 @@ public void setPriority (byte priority) {
     public void printTaskName() {
         System.out.println(this.getContent(contentV));
     }
-
  }
