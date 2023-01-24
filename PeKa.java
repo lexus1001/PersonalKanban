@@ -1,6 +1,5 @@
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -52,6 +51,7 @@ public class PeKa {
         Task testFile = new Task(1, UUIDs[1], 2, "", true);
         Task testAdd = new Task(0, randomUUID(), 3, "", true);
         Task Add1 = new Task(0, randomUUID(), 3, "", true);
+        Task shortTask = new Task(10,0,"Something");
         Task[] ForAdd = new Task[taskCount + 1];
 
         Scanner enterTask = new Scanner(System.in);
@@ -63,11 +63,17 @@ public class PeKa {
             taskCount = tskCnt.nextInt();
 
             if (taskCount == 1) {
-                ForAdd[0] = testAdd;
-                ForAdd[0].addTask();
-                IO.writeTask(testAdd);
-                IO.readTask();
-                System.out.println(IO.readTask());
+                shortTask.addTask();
+                //IO.writeTask(shortTask);
+                try {
+                    FileOutputStream wrTask = new FileOutputStream(Options.taskName());
+                    ObjectOutputStream wrTas = new ObjectOutputStream(wrTask);
+                    wrTas.writeObject(shortTask);
+                    wrTas.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                    IO.readTask();
             } else if (taskCount == 2) {
                 ForAdd[0] = testAdd;
                 ForAdd[0].addTask();
@@ -75,12 +81,11 @@ public class PeKa {
                 ForAdd[1].addTask();
             }
         } else if (mode.equals("n")) {
-
                 Scanner exit = new Scanner(System.in);
 
                 do {
                     System.out.println("Please enter priority first letter: ");
-                    System.out.println("u - Urgent\nh - High\nm - Medium\nt - Recently added task");
+                    System.out.println("h - High\nm - Medium\nt - Recently added task");
                     System.out.println("or a for all.\nType 's' button for statistic.");
                     Scanner priorScan = new Scanner(System.in);
                     u = priorScan.nextLine();
@@ -94,14 +99,6 @@ public class PeKa {
                             for (int i = 0; i < taskCount; i++) {
                             }
                             IO.readTaskContent();
-                        }
-                        case "u" -> {
-                            System.out.println("Your task(s) with urgent priority:");
-                            presettledOutput.urgentOutput();
-                            if (testAdd.priorityV == 0) {
-                                for (int i = 0; i < taskCount; i++) {
-                                }
-                            }
                         }
                         case "h" -> {
                             System.out.println("Your high priority task(s):");
@@ -130,9 +127,10 @@ public class PeKa {
                             System.out.println("All priorities: " + Arrays.toString(Priorities));
                         }
                         case "add" -> {
+                            System.out.println("Serialized task");
                             try {
                                 IO.readTask();
-                             //   System.out.println(IO.readTask().priorityV);
+                                System.out.println(IO.readTask().priorityV);
                             } catch (IOException | ClassNotFoundException e) {
                                 throw new RuntimeException(e);
                             }

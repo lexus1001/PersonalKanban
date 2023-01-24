@@ -22,7 +22,7 @@ byte priorityV;
         setContent(contentV);
         setPriority(priorityV);
         setNumber(numberV);
-       // setUuid(uuid);
+        setUuid(uuid);
     }
     public int getNumber() {
         number = numberV;

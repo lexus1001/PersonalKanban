@@ -22,6 +22,7 @@ public class IO {
             throw new RuntimeException(e);
         }
     }
+
     public static int[] readTaskNumber() throws FileNotFoundException, ParseException {
         String ion = Options.setNumberFilename();
         String path = String.format("C:\\Development\\%s", ion);
@@ -37,6 +38,7 @@ public class IO {
         NumbersReader.close();
         return numbersN;
     }
+
     public static UUID[] readTaskUUID() throws IOException {
         String iou = Options.setUUIDFilename();
         String path = String.format("C:\\Development\\%s", iou);
@@ -71,8 +73,8 @@ public class IO {
         return prioritiesN;
     }
 
-    public static void writeTask(Task tsk1) {
-Task tsk = new Task(25, 2,"dssd");
+    public static Task writeTask(Task tsk) {
+        tsk = new Task(25, 2, "dssd");
         try {
             FileOutputStream wrTask = new FileOutputStream(Options.taskName());
             ObjectOutputStream wrTas = new ObjectOutputStream(wrTask);
@@ -81,24 +83,20 @@ Task tsk = new Task(25, 2,"dssd");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //return tsk1;
+        return tsk;
     }
 
-    public static Object readTask() throws IOException, ClassNotFoundException {
-//        String iota = Options.taskName();
-//        String path = String.format(iota);
-        Task printedTask = new Task();
+    public static Task readTask() throws IOException, ClassNotFoundException {
+        Task printedTask;
         try {
             FileInputStream reTask = new FileInputStream(Options.taskName());
             ObjectInputStream reTas = new ObjectInputStream(reTask);
             printedTask = (Task) reTas.readObject();
-//            System.out.println("Entered task: ");
-//            System.out.println(printedTask.toString());
-reTas.close();
+            printedTask.printTaskFullInfo();
+            reTas.close();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        //return printedTask;
-        return null;
+        return printedTask;
     }
 }

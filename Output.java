@@ -1,14 +1,8 @@
 public class Output {
-    public final String task1 = "Wake up";
 
 public void fullOutput()
     {
-        urgentOutput();
         highOutput();
-    }
-    public void urgentOutput()
-    {
-        System.out.println(task1);
     }
     public void highOutput()
     {
