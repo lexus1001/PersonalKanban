@@ -1,4 +1,11 @@
+import java.io.IOException;
+
 public class Output {
+
+    public static void printTask() throws IOException, ClassNotFoundException {
+
+        IO.readTask().printTaskFullInfo();
+    }
 
 public void fullOutput()
     {
@@ -6,8 +13,7 @@ public void fullOutput()
     }
     public void highOutput()
     {
-        String task2 = "Daily meeting";
-        System.out.println(task2);
+
     }
     public static void printPaths() {
         System.out.println("File name for numbers: " + Options.setNumberFilename());
@@ -16,5 +22,4 @@ public void fullOutput()
         System.out.println("File name for UUIDs: " + Options.setUUIDFilename());
         System.out.println("File name for added task: " + Options.taskName());
     }
-
 }

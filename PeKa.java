@@ -1,4 +1,5 @@
 
+import javax.ws.rs.Priorities;
 import java.io.*;
 import java.text.ParseException;
 import java.util.Arrays;
@@ -8,16 +9,7 @@ import static java.util.UUID.randomUUID;
 
 public class PeKa {
 
-    private final static int[] Priorities;
-
-    static {
-        try {
-            Priorities = IO.readTaskPriority();
-        } catch (IOException | ParseException ep) {
-            throw new RuntimeException(ep);
-        }
-    }
-    private static UUID[] UUIDs;
+    private static final UUID[] UUIDs;
 
     static {
         try {
@@ -102,18 +94,14 @@ public class PeKa {
                         }
                         case "h" -> {
                             System.out.println("Your high priority task(s):");
-                            presettledOutput.highOutput();
-                            if (ForAdd[taskCount - 1].priorityV == 1) { //ToDo fix array size error
-                                for (int i = 0; i < taskCount; i++) {
-                                }
+                            if (IO.readTask().priorityV == 1) {
+                                Output.printTask();
+                            } else
+                            {
+                                System.out.println("Nothing to output");
                             }
                         }
                         case "m" -> {
-                            System.out.println("Your medium priority task(s):");
-                            if (testAdd.priorityV == 2) {
-                                testAdd.printTaskName();
-                            }
-                            System.out.println("Task number " + Numbers[testFile.number] + " : " + Tasks[testFile.number] + " with UUID = " + UUIDs[testFile.number] + " and priority " + Priorities[testFile.number]);
                         }
                         case "s" -> {
                             for (int i = 0; i < taskCount; i++) {
@@ -124,7 +112,7 @@ public class PeKa {
                             System.out.println("All tasks: " + Arrays.toString(Tasks));
                             System.out.println("All numbers: " + Arrays.toString(Numbers));
                             System.out.println(Arrays.toString(UUIDs));
-                            System.out.println("All priorities: " + Arrays.toString(Priorities));
+                            //System.out.println("All priorities: " + Arrays.toString(Priorities));
                         }
                         case "add" -> {
                             System.out.println("Serialized task");

@@ -14,7 +14,7 @@ public class Options {
 
     public static String setPriorityFilename() {
         String Priority;
-        Priority = String.valueOf(path.append("priorities.cpd"));
+        Priority = String.valueOf(path.append("priorities.cpd"));//ToDo Упростить, понять почему ошибки при упрощении
         return Priority;
     }
 

@@ -31,7 +31,7 @@ byte priorityV;
     public void setNumber(int number) {
         Scanner numScan = new Scanner(System.in);
         System.out.println("Enter number for new task");
-        numberV = numScan.nextInt();
+        this.numberV = numScan.nextInt();
     }
 
     public void setUuid(UUID uuid1) {

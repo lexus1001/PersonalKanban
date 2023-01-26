@@ -92,7 +92,6 @@ public class IO {
             FileInputStream reTask = new FileInputStream(Options.taskName());
             ObjectInputStream reTas = new ObjectInputStream(reTask);
             printedTask = (Task) reTas.readObject();
-            printedTask.printTaskFullInfo();
             reTas.close();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
