@@ -1,8 +1,8 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class Task {
-
+public class Task implements Serializable {
 public String contentV;
 String[] ContentArray = new String[5];
 byte priorityV;
@@ -13,15 +13,11 @@ byte priorityV;
 
     public Task (int number, UUID uuid2, int priority, String content, boolean active) {
     }
-    public Task (int priority, String content)
-    {};
-    public Task (String content)
-    {
-        setContent(contentV);
+    public Task (int number, int priority, String content){
+
     }
     public Task(){
     };
-
     public void addTask() {
         setContent(contentV);
         setPriority(priorityV);
@@ -35,7 +31,7 @@ byte priorityV;
     public void setNumber(int number) {
         Scanner numScan = new Scanner(System.in);
         System.out.println("Enter number for new task");
-        numberV = numScan.nextInt();
+        this.numberV = numScan.nextInt();
     }
 
     public void setUuid(UUID uuid1) {
@@ -51,7 +47,15 @@ public void setContent (String content) {
     System.out.println("Please enter task content.");
     ContentArray[number] = writeContent.nextLine();
     this.contentV = ContentArray[this.number];
-}
+    PrintWriter pwTasks = null;
+        try {
+            pwTasks = new PrintWriter(Options.setTaskPath());
+            pwTasks.println(writeContent.nextLine());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        pwTasks.close();
+    }
     public String getContent(String contnt) {
         contnt = contentV;
         return contnt;
@@ -74,16 +78,5 @@ public void setPriority (byte priority) {
     }
     public void printTaskName() {
         System.out.println(this.getContent(contentV));
-    }
-
-    @Deprecated
-    public void printAllUUIDs() {// ToDo Don't work cause UUID's now no in task array
-//        for (UUID uuid:uuidArray) {
-//            if (this.uuid != null) {
-                System.out.println(this.uuid + " (task #" + this.numberV + ")");
-               // break;
-          //  }
-      //  }
-        System.out.println("Maximum count of tasks with UUID = " + uuidArray.length);
     }
  }
