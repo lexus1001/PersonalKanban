@@ -113,12 +113,18 @@ public class PeKa {
                             System.out.println("All numbers: " + Arrays.toString(Numbers));
                             System.out.println(Arrays.toString(UUIDs));
                             //System.out.println("All priorities: " + Arrays.toString(Priorities));
+                            IO.readOptionFile();
+                            Output.printPaths();
                         }
                         case "add" -> {
-                            System.out.println("Serialized task");
+                            System.out.println("Single serialized task output:");
                             try {
-                                IO.readTask();
-                                System.out.println(IO.readTask().priorityV);
+                                Task yy;
+                                //IO.readTask();
+                                yy = IO.readTask();
+                               // System.out.println(yy.toString());
+                                yy.printTaskFullInfo();
+                               // System.out.println(IO.readTask().priorityV);
                             } catch (IOException | ClassNotFoundException e) {
                                 throw new RuntimeException(e);
                             }

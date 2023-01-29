@@ -72,7 +72,7 @@ public void setPriority (byte priority) {
     }
     public void printTaskFullInfo(){
         StringBuilder prnt = new StringBuilder();
-        prnt.append("Task number ").append(this.getNumber()).append(" ").append(this.getContent(contentV)).append(" with priority ").append(this.getPriority(priorityV));
+        prnt.append("Task number ").append(this.getNumber()).append(": ").append(this.getContent(contentV)).append(", with priority ").append(this.getPriority(priorityV));
         System.out.println(prnt);
         System.out.println("Tasks UUID: " + getUuid(this.uuid));
     }

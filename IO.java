@@ -1,11 +1,27 @@
 import java.io.*;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.UUID;
 
 public class IO {
 
     String[] ContentArray = new String[5];
+
+    public static String[] readOptionFile() {
+        String path = "Options.txt";
+        File FileForOptions = new File(path);
+        Scanner optionReader = null;
+        try {
+            optionReader = new Scanner(FileForOptions);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String optionsLine = optionReader.nextLine();
+        String[] oneOption = optionsLine.split(" ");
+        optionReader.close();
+        return oneOption;
+    };
 
     public static String[] readTaskContent() {
         String path = Options.setTaskPath();
