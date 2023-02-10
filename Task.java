@@ -3,13 +3,15 @@ import java.util.Scanner;
 import java.util.UUID;
 
 public class Task implements Serializable {
+    private static final long serialVersionUID = 987;
 public String contentV;
 String[] ContentArray = new String[5];
 byte priorityV;
     UUID[] uuidArray = new UUID[4];
-    UUID uuid;
-    int number;
+    transient UUID uuid;
+    private int number;
     int numberV;
+    String priorityName = null;
 
     public Task (int number, UUID uuid2, int priority, String content, boolean active) {
     }
@@ -32,10 +34,13 @@ byte priorityV;
         Scanner numScan = new Scanner(System.in);
         System.out.println("Enter number for new task");
         this.numberV = numScan.nextInt();
+        if (numberV<0) {
+            this.numberV = Math.negateExact(numberV);
+        }
     }
 
     public void setUuid(UUID uuid1) {
-        uuidArray[number] = UUID.randomUUID();
+         uuidArray[number] = UUID.randomUUID();
             this.uuid = uuidArray[this.number];
         }
 
@@ -46,6 +51,7 @@ public void setContent (String content) {
     Scanner writeContent = new Scanner(System.in);
     System.out.println("Please enter task content.");
     ContentArray[number] = writeContent.nextLine();
+
     this.contentV = ContentArray[this.number];
     PrintWriter pwTasks = null;
         try {
@@ -60,16 +66,34 @@ public void setContent (String content) {
         contnt = contentV;
         return contnt;
     }
-public void setPriority (byte priority) {
+public void setPriority (byte priorityV) {
+    byte priority;
     Scanner writePriority = new Scanner(System.in);
     System.out.println("Enter task priority");
-    System.out.println("0 - Urgent\n1 - High\n2 - Medium\n3 - Low");
+    System.out.println("0 - " + Priority.Critical + "\n1 - " + Priority.High + "\n2 - " + Priority.Medium + "\n3 - " + Priority.Low);
     priorityV = writePriority.nextByte();
+    if (priorityV<0) {
+        priorityV=(byte) Math.negateExact(priorityV);
+    }
+
     }
     public int getPriority (byte prrty) {
        prrty = priorityV;
         return prrty;
     }
+
+    public String get2Priority (String prrtyName) {
+
+        switch (priorityV) {
+            case 0 -> {
+                priorityName = Priority.Critical.toString();
+            }
+        }
+
+        prrtyName = priorityName;
+        return prrtyName;
+    }
+
     public void printTaskFullInfo(){
         StringBuilder prnt = new StringBuilder();
         prnt.append("Task number ").append(this.getNumber()).append(": ").append(this.getContent(contentV)).append(", with priority ").append(this.getPriority(priorityV));
@@ -78,5 +102,9 @@ public void setPriority (byte priority) {
     }
     public void printTaskName() {
         System.out.println(this.getContent(contentV));
+    }
+
+    public String toString() {
+        return "Task " + contentV + " with priority " + priorityName + " and number " + numberV + ". UUID for this task:  " + uuid + ".";
     }
  }

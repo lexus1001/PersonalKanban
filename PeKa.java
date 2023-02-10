@@ -1,5 +1,3 @@
-
-import javax.ws.rs.Priorities;
 import java.io.*;
 import java.text.ParseException;
 import java.util.Arrays;
@@ -40,7 +38,6 @@ public class PeKa {
         int taskCount = 1;
         String mode;
 
-        Task testFile = new Task(1, UUIDs[1], 2, "", true);
         Task testAdd = new Task(0, randomUUID(), 3, "", true);
         Task Add1 = new Task(0, randomUUID(), 3, "", true);
         Task shortTask = new Task(10,0,"Something");
@@ -57,11 +54,8 @@ public class PeKa {
             if (taskCount == 1) {
                 shortTask.addTask();
                 //IO.writeTask(shortTask);
-                try {
-                    FileOutputStream wrTask = new FileOutputStream(Options.taskName());
-                    ObjectOutputStream wrTas = new ObjectOutputStream(wrTask);
+                try (ObjectOutputStream wrTas = new ObjectOutputStream(new FileOutputStream(Options.taskName()))) {
                     wrTas.writeObject(shortTask);
-                    wrTas.close();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -76,23 +70,24 @@ public class PeKa {
                 Scanner exit = new Scanner(System.in);
 
                 do {
-                    System.out.println("Please enter priority first letter: ");
+                    System.out.println("Please enter priority first letter from " + Input.values().length + " znacheniy: " + Arrays.stream(Input.values()).toList());
                     System.out.println("h - High\nm - Medium\nt - Recently added task");
                     System.out.println("or a for all.\nType 's' button for statistic.");
                     Scanner priorScan = new Scanner(System.in);
                     u = priorScan.nextLine();
+                    Input inpt = Input.valueOf(u);
 
-                    switch (u) {
-                        case "t" -> {
+                    switch (inpt) {
+                        case t -> {
                             System.out.println("Nothing to output");
                         }
-                        case "a" -> {
+                        case a -> {
                             presettledOutput.fullOutput();
                             for (int i = 0; i < taskCount; i++) {
                             }
                             IO.readTaskContent();
                         }
-                        case "h" -> {
+                        case h -> {
                             System.out.println("Your high priority task(s):");
                             if (IO.readTask().priorityV == 1) {
                                 Output.printTask();
@@ -101,37 +96,32 @@ public class PeKa {
                                 System.out.println("Nothing to output");
                             }
                         }
-                        case "m" -> {
+                        case m -> {
                         }
-                        case "s" -> {
+                        case s -> {
                             for (int i = 0; i < taskCount; i++) {
                                 Output.printPaths();
                             }
                         }
-                        case "Test" -> {
+                        case Test -> {
                             System.out.println("All tasks: " + Arrays.toString(Tasks));
                             System.out.println("All numbers: " + Arrays.toString(Numbers));
                             System.out.println(Arrays.toString(UUIDs));
-                            //System.out.println("All priorities: " + Arrays.toString(Priorities));
                             IO.readOptionFile();
-                            Output.printPaths();
                         }
-                        case "add" -> {
+                        case add -> {
                             System.out.println("Single serialized task output:");
                             try {
                                 Task yy;
                                 //IO.readTask();
                                 yy = IO.readTask();
-                               // System.out.println(yy.toString());
-                                yy.printTaskFullInfo();
+                                System.out.println(yy.toString());
+                               // yy.printTaskFullInfo();
                                // System.out.println(IO.readTask().priorityV);
                             } catch (IOException | ClassNotFoundException e) {
                                 throw new RuntimeException(e);
                             }
                             System.out.println();
-                        }
-                        default -> {
-                            System.err.println("Unknown priority");
                         }
                     }
                     System.out.println("Press 0 for exit, any another digit for continue.");
